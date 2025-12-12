@@ -31,10 +31,13 @@
     Otwórz zdjęcia
   </button>
 
-  <script>
+   <script>
     function start() {
+      // Włącz muzykę
       document.getElementById('player').play();
-      window.location.href = "https://drive.google.com/drive/folders/1qbbymyMj_QOEQz3kywZZ_D9G4hzvCTnW?usp=sharing";
+
+      // Otwórz Google Drive w nowej karcie
+      window.open("https://drive.google.com/drive/folders/1qbbymyMj_QOEQz3kywZZ_D9G4hzvCTnW?usp=sharing", "_blank");
     }
   </script>
 
