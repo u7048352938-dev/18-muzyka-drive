@@ -8,36 +8,46 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 40px;
+      background: #fafafa;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
     }
     button {
       padding: 20px 30px;
-      font-size: 20px;
+      font-size: 22px;
       border-radius: 10px;
       background: #4285F4;
       color: white;
       border: none;
       cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #336ad1;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>🎉 Kliknij aby rozpocząć</h1>
+  <h1>🎉 Kliknij aby rozpocząć 🎶</h1>
 
   <audio id="player" src="muzyka.mp3"></audio>
 
-  <button onclick="start()">
-    Otwórz zdjęcia
-  </button>
+  <button onclick="start()">Otwórz zdjęcia 📸</button>
 
-   <script>
+  <script>
     function start() {
-      // Włącz muzykę
+      // Start muzyki
       document.getElementById('player').play();
 
-      // Otwórz Google Drive w nowej karcie
-      window.open("https://drive.google.com/drive/folders/1qbbymyMj_QOEQz3kywZZ_D9G4hzvCTnW?usp=sharing", "_blank");
+      // Otwórz folder Drive w nowej karcie
+      window.open(
+        "https://drive.google.com/drive/folders/1qbbymyMj_QOEQz3kywZZ_D9G4hzvCTnW?usp=sharing",
+        "_blank"
+      );
     }
   </script>
 
