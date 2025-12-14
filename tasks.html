@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Zadania 🎯</title>
 
-  <!-- Firebase SDK (compat dla prostego użycia w przeglądarce) -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -29,13 +29,13 @@
     }
     button {
       padding: 15px 25px;
-      font-size: 18px;
+      font-size: 20px;
       border-radius: 10px;
       background: #4285F4;
       color: white;
       border: none;
       cursor: pointer;
-      margin: 20px 0;
+      margin-bottom: 30px;
     }
     input[type="file"] {
       display: none;
@@ -46,14 +46,14 @@
 
 <h1>📝 Lista zadań urodzinowych</h1>
 
-<div id="tasks"></div>
-
-<!-- Przycisk aparatu -->
+<!-- Przycisk aparatu na górze -->
 <button onclick="openCamera()">📸 Zrób zdjęcie</button>
 <input type="file" id="camera" accept="image/*" capture="environment" />
 
+<div id="tasks"></div>
+
 <script>
-  // ---- Twoja konfiguracja Firebase ----
+  // ---- Konfiguracja Firebase ----
   const firebaseConfig = {
     apiKey: "AIzaSyBWt_t1hEwZbSJYoaCVrkBvVl4A-9gqnl4",
     authDomain: "moje-zadania-dc375.firebaseapp.com",
@@ -105,18 +105,16 @@
     label.appendChild(document.createTextNode(" " + task));
     container.appendChild(label);
 
-    // Pobieranie stanu z Firebase w czasie rzeczywistym
     db.ref("tasks/" + index).on("value", snapshot => {
       checkbox.checked = snapshot.val() || false;
     });
 
-    // Aktualizacja Firebase po zmianie stanu
     checkbox.addEventListener("change", () => {
       db.ref("tasks/" + index).set(checkbox.checked);
     });
   });
 
-  // ---- Kamera + upload do Flask/Cloudflare ----
+  // ---- Kamera + upload do Cloudflare ----
   function openCamera() {
     document.getElementById("camera").click();
   }
