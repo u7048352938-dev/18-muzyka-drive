@@ -15,9 +15,9 @@
       margin: auto;
       padding: 40px;
       background: #f5f5f5;
+      text-align: center;
     }
     h1 {
-      text-align: center;
       margin-bottom: 20px;
       color: #333;
     }
@@ -27,12 +27,30 @@
       font-size: 18px;
       cursor: pointer;
     }
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border-radius: 10px;
+      background: #4285F4;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+    input[type="file"] {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
 <h1>📝 Lista zadań urodzinowych</h1>
+
 <div id="tasks"></div>
+
+<!-- Przycisk aparatu -->
+<button onclick="openCamera()">📸 Zrób zdjęcie</button>
+<input type="file" id="camera" accept="image/*" capture="environment" />
 
 <script>
   // ---- Twoja konfiguracja Firebase ----
@@ -51,7 +69,7 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // Lista przykładowych zadań
+  // Lista zadań
   const tasks = [
     "Zrób zdjęcie z panią mamą",
     "Zrób zdjęcie z Krzychem",
@@ -72,8 +90,7 @@
     "Zrób zdjęcie z Hanczolem",
     "Zrób zdjęcie z osobą po prawej",
     "Zrób zdjęcie na cigaret pauzie",
-    "Zrób zdjęcie w altance",
-
+    "Zrób zdjęcie w altance"
   ];
 
   const container = document.getElementById("tasks");
@@ -97,6 +114,26 @@
     checkbox.addEventListener("change", () => {
       db.ref("tasks/" + index).set(checkbox.checked);
     });
+  });
+
+  // ---- Kamera + upload do Flask/Cloudflare ----
+  function openCamera() {
+    document.getElementById("camera").click();
+  }
+
+  document.getElementById("camera").addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const data = new FormData();
+    data.append("photo", file);
+
+    fetch("https://speaking-str-saskatchewan-population.trycloudflare.com/upload", {
+      method: "POST",
+      body: data
+    })
+    .then(() => alert("✅ Zdjęcie wysłane!"))
+    .catch(() => alert("❌ Błąd wysyłania"));
   });
 </script>
 
