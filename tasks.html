@@ -211,7 +211,7 @@
       const data = new FormData();
       data.append("photo", file);
 
-      fetch("https://med-laden-operation-munich.trycloudflare.com", {
+      fetch("https://med-laden-operation-munich.trycloudflare.com/upload", {
         method: "POST",
         body: data
       })
